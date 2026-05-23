@@ -6,7 +6,6 @@
   },
   "deploy": {
     "startCommand": "node server.js",
-    "healthcheckPath": "/api/verify",
     "restartPolicyType": "ON_FAILURE"
   }
 }
