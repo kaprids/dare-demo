@@ -15,11 +15,16 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
-// 健康检查 + 调试
+// 健康检查
 app.get('/health', (req, res) => {
-  const publicDir = join(__dirname, 'public');
-  const files = fs.existsSync(publicDir) ? fs.readdirSync(publicDir) : ['DIR NOT FOUND'];
-  res.json({ status: 'ok', publicDir, files, env: { API_BASE_URL, ACCESS_CODE } });
+  try {
+    const publicDir = join(__dirname, 'public');
+    const hasDir = fs.existsSync(publicDir);
+    const files = hasDir ? fs.readdirSync(publicDir) : [];
+    res.json({ status: 'ok', publicDir, hasDir, files });
+  } catch (e) {
+    res.json({ status: 'error', message: e.message });
+  }
 });
 
 // 生产环境：托管前端构建文件
