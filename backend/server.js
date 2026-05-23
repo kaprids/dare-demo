@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -13,6 +14,13 @@ const __dirname = dirname(__filename);
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+
+// 健康检查 + 调试
+app.get('/health', (req, res) => {
+  const publicDir = join(__dirname, 'public');
+  const files = fs.existsSync(publicDir) ? fs.readdirSync(publicDir) : ['DIR NOT FOUND'];
+  res.json({ status: 'ok', publicDir, files, env: { API_BASE_URL, ACCESS_CODE } });
+});
 
 // 生产环境：托管前端构建文件
 app.use(express.static(join(__dirname, 'public')));
