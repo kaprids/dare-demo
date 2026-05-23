@@ -16,14 +16,7 @@ app.use(express.json({ limit: '10mb' }));
 
 // 健康检查
 app.get('/health', (req, res) => {
-  try {
-    const publicDir = join(__dirname, 'public');
-    const hasDir = fs.existsSync(publicDir);
-    const files = hasDir ? fs.readdirSync(publicDir) : [];
-    res.json({ status: 'ok', publicDir, hasDir, files });
-  } catch (e) {
-    res.json({ status: 'error', message: e.message });
-  }
+  res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
 // 生产环境：托管前端构建文件
