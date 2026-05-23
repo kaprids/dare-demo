@@ -170,5 +170,13 @@ app.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'public', 'index.html'));
 });
 
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled Rejection:', err);
+});
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`DARE 后端已启动: http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`DARE 后端已启动: http://localhost:${PORT}`));
