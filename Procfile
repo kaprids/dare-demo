@@ -1,0 +1,1 @@
+web: sh -c "cd frontend && npm install && npx vite build 2>/dev/null && mkdir -p ../backend/public && cp -r dist/* ../backend/public/ 2>/dev/null; cd .. && node backend/server.js"
