@@ -171,4 +171,17 @@ process.on('unhandledRejection', (err) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, '0.0.0.0', () => console.log(`DARE 后端已启动: http://localhost:${PORT}`));
+
+// 启动诊断：打印关键变量
+console.log('=== DARE 启动诊断 ===');
+console.log('PORT:', PORT);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('API_KEY 已配置:', !!process.env.API_KEY);
+console.log('API_BASE_URL:', process.env.API_BASE_URL || '未设置');
+console.log('public 目录存在:', fs.existsSync(join(__dirname, 'public')));
+console.log('index.html 存在:', fs.existsSync(join(__dirname, 'public', 'index.html')));
+console.log('====================');
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ DARE 后端已启动: http://0.0.0.0:${PORT}`);
+});
