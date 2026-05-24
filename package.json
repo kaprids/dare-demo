@@ -1,1 +1,1 @@
-{"name": "dare-fullstack", "version": "1.0.0", "private": true, "scripts": {"build": "cd frontend && npm install && npm run build && cp -r dist ../backend/public", "start": "cd backend && node server.js"}}
+{"name": "dare-demo", "version": "1.0.0", "type": "module", "scripts": {"install:all": "cd backend && npm install --omit=dev && cd ../frontend && npm install && npx vite build && mkdir -p ../backend/public && cp -r dist/* ../backend/public/", "start": "node backend/server.js"}, "dependencies": {"express": "^4.21.0", "cors": "^2.8.5", "dotenv": "^16.4.5"}}

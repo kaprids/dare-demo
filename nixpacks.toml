@@ -1,0 +1,15 @@
+# Nixpacks 构建配置 for DARE Demo
+
+[variables]
+  NIXPACKS_PKG_MANAGER = "npm"
+
+[phases.install]
+  # 安装后端依赖（根目录 package.json 的 dependencies）
+  cmds = ["npm install --omit=dev"]
+
+[phases.build]
+  # 安装前端依赖 + vite 构建
+  cmds = ["cd frontend && npm install && npx vite build", "mkdir -p ../backend/public", "cp -r dist/* ../backend/public/"]
+
+[start]
+  cmd = "node backend/server.js"
