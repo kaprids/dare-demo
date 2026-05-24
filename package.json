@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "npm install --prefix frontend && npm install --prefix backend && cd frontend && npm run build && mkdir -p ../backend/public && cp -r dist/* ../backend/public/",
+    "build": "cd frontend && npx vite build && cd .. && mkdir -p backend/public && cp -r frontend/dist/* backend/public/",
     "start": "cd backend && node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
   }
+
 }
