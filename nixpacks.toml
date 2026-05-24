@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["nodejs-20_x"]
+
+[phases.install]
+cmds = [
+  "cd frontend && npm install",
+  "cd backend && npm install"
+]
+
+[phases.build]
+cmds = ["cd frontend && npx vite build && mkdir -p ../backend/public && cp -r dist/* ../backend/public/"]
+
+[start]
+cmd = "cd backend && node server.js"
